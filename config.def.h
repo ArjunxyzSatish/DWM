@@ -25,6 +25,21 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
+
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
+const char *spcmd3[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+	{"spranger",    spcmd2},
+	{"spterm2",   spcmd3},
+};
+
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
@@ -37,9 +52,13 @@ static const Rule rules[] = {
 	{ "TelegramDesktop",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "obs",                NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Lutris",             NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "firefox",   		NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
 	{ "St",                 NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,                 NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
+	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
+	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
+	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
+	{ NULL,		  "spterm2",	        NULL,		SPTAG(2),		1,			 -1 },
 };
 
 /* layout(s) */
@@ -71,6 +90,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont}
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
+  
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
@@ -97,6 +117,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY,            			XK_y,  	   togglescratch,  {.ui = 0 } },
+	{ MODKEY,            			XK_u,	   togglescratch,  {.ui = 1 } },
+	{ MODKEY,            			XK_grave,  togglescratch,  {.ui = 2 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,			XK_minus,  setgaps,	   {.i = -1 } },
@@ -128,7 +151,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,		spawn,		SHCMD("brave") },
 	{ MODKEY|ShiftMask,             XK_w,		spawn,		SHCMD("librewolf") },
 
-  
 
 };
 
@@ -142,7 +164,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
