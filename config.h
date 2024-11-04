@@ -52,7 +52,8 @@ static const Rule rules[] = {
 	{ "TelegramDesktop",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "obs",                NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Lutris",             NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "St",                 NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "St",                 NULL,     NULL,           0,         0,          1,           1,        -1 },
+	// { NULL,                 "ipython",     NULL,           0,         0,          1,           1,        -1 },
 	{ NULL,                 NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
 	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
@@ -101,11 +102,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_g,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_f,	   zoom,           {0} },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_s,      incnmaster,     {.i = +1 } },
+	// { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	// { MODKEY,                       XK_s,      incnmaster,     {.i = +1 } },
 	{ MODKEY,		        XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
+	// { MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
+	// { MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
 	/*{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[2]} },*/
 	{ MODKEY|ShiftMask,             XK_f,  	   togglefloating, {0} },
 	{ MODKEY,                       XK_t,  	   setlayout,      {0} },
@@ -131,11 +132,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,		XK_q,      quit,           {0} },
+	// { MODKEY|ShiftMask,		XK_q,      quit,           {0} },
 
 	{ MODKEY,            			XK_y,  	   togglescratch,  {.ui = 0 } },
-	{ MODKEY,            			XK_u,	   togglescratch,  {.ui = 1 } },
-	{ MODKEY,            			XK_grave,  togglescratch,  {.ui = 2 } },
+	// { MODKEY,            			XK_u,	   togglescratch,  {.ui = 1 } },
+	// { MODKEY,            			XK_grave,  togglescratch,  {.ui = 2 } },
 
 	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("brightnessctl set +1%") },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("brightnessctl set 1%-") },
@@ -146,12 +147,16 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ranger") },
 	{ MODKEY,			XK_p,		spawn,		SHCMD(TERMINAL " -e bashtop") },
+	{ MODKEY|ShiftMask,             XK_s,		spawn,		SHCMD("dmenurecord") },
 	{ MODKEY,                       XK_s,		spawn,		SHCMD("maimpick") },
-	{ MODKEY|ShiftMask,             XK_r,		spawn,		SHCMD("dmenurecord") },
 	{ MODKEY|ShiftMask,             XK_r,		spawn,		SHCMD("thunar") },
 	{ MODKEY,                       XK_BackSpace,	spawn,		SHCMD("sysact") },
+	{ Mod1Mask|ControlMask,         XK_y,	spawn,		SHCMD("xmodmap ~/.xmodmap") },
 	{ MODKEY,                       XK_w,		spawn,		SHCMD("brave") },
 	{ MODKEY|ShiftMask,             XK_w,		spawn,		SHCMD("librewolf") },
+	{ MODKEY|ShiftMask,             XK_n,		spawn,		SHCMD(TERMINAL " -e nmtui") },
+	{ MODKEY|ShiftMask,             XK_b,		spawn,		SHCMD("blueman-manager") },
+	{ MODKEY|ShiftMask,             XK_a,		spawn,		SHCMD("pavucontrol") },
 
 
 };
